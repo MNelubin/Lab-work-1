@@ -12,7 +12,6 @@
 #include "cstring"
 #include "string" 
 
-// CIEXYZTRIPLE stuff
 typedef int FXPT2DOT30;
  
 typedef struct {
@@ -74,12 +73,32 @@ typedef struct {
 
 class ImD{
 public:
+    BITMAPFILEHEADER fileHeader;
+    BITMAPINFOHEADER infoHeader;
+    RGBQUAD** pixels;
+    int padding;
 
-    ImD(int H, int W,int od){
-        unsigned char hdr[od];
-        RGBQUAD pixels[H][W];
+    ImD(const BITMAPFILEHEADER& fh,const BITMAPINFOHEADER& ih, RGBQUAD** pixelData, int pad): fileHeader(fh),infoHeader(ih),padding(pad)
+    {
+        std::cout<<1111111;
+        pixels = new RGBQUAD*[infoHeader.biHeight];
+        for (unsigned int i=0; i<infoHeader.biHeight; ++i )
+        {
+            pixels[i] = new RGBQUAD[infoHeader.biWidth];
+            for (unsigned int j=0; j<infoHeader.biWidth; ++i)
+            {
+                pixels[i][j] = pixelData[i][j];
+            }
+        }
     }
     
+    ~ImD(){
+        for (unsigned int i=0; i<infoHeader.biHeight; ++i){
+            delete [] pixels[i];
+        }
+        delete[] pixels;
+    }
+
 };
  
 // read bytes
@@ -95,4 +114,4 @@ void wrt(Type &result) {
 
 int reader(std::string);
 
-#endif // MAIN_H_INCLUDEDs
+#endif 

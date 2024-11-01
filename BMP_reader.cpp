@@ -112,22 +112,6 @@ int reader(std::string fileName)
      read(fil_r, fileInfoHeader.biReserved, sizeof(fileInfoHeader.biReserved));
  }
 
-     // проверка на поддерку этой версии формата
- if (fileInfoHeader.biSize != 12 && fileInfoHeader.biSize != 40 && fileInfoHeader.biSize != 52 &&
-     fileInfoHeader.biSize != 56 && fileInfoHeader.biSize != 108 && fileInfoHeader.biSize != 124) {
-     std::cout << "Error: Unsupported BMP format." << std::endl;
-     return 0;
- }
-
- if (fileInfoHeader.biBitCount != 16 && fileInfoHeader.biBitCount != 24 && fileInfoHeader.biBitCount != 32) {
-     std::cout << "Error: Unsupported BMP bit count." << std::endl;
-     return 0;
- }
-
- if (fileInfoHeader.biCompression != 0 && fileInfoHeader.biCompression != 3) {
-     std::cout << "Error: Unsupported BMP compression." << std::endl;
-     return 0;
- }
 
  // rgb info
  RGBQUAD **rgbInfo = new RGBQUAD*[fileInfoHeader.biHeight];
@@ -171,6 +155,9 @@ int reader(std::string fileName)
      fil_r.seekg(linePadding, std::ios_base::cur);
  }
 
+
+
+
  // вывод
  for (unsigned int i = 0; i < fileInfoHeader.biHeight; i++) {
     for (unsigned int j = 0; j < fileInfoHeader.biWidth; j++) {
@@ -185,9 +172,17 @@ int reader(std::string fileName)
  }
 
 
+
  std::cout<<(int)rgbInfo[0][0].rgbRed<<(int)rgbInfo[0][0].rgbGreen<<(int)rgbInfo[0][0].rgbBlue<<(int)rgbInfo[0][0].rgbReserved<<std::endl;
  std::cout<<fileInfoHeader.biBitCount;
  writer("examples_BMP/1_bmp_24.bmp",rgbInfo[fileInfoHeader.biHeight-1][fileInfoHeader.biWidth-1].rgbReserved);
+
+ ImD* orig = new ImD(fileHeader,fileInfoHeader,rgbInfo,linePadding);
+ /*
+ ImD *cartinka =new ImD(fileInfoHeader.biHeight,fileInfoHeader.biWidth,fileHeader.bfOffBits);
+ cartinka->hdr={'4d','4d'};
+ std::cout<<cartinka.hdr[0]<<cartinka.hdr[1]<<std::endl;
+ */
 /*
  std::string **fil = new std::string*[fileInfoHeader.biHeight];
  fil[0]= new std::string[1];
