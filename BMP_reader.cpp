@@ -127,14 +127,18 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
     delete[] rgbInfo;
 
 
-    if (need_contrclock){
+    if (need_contrclock)
+    {
         orig->rotate90ContClockwise(fileName+"_rotContC.bmp");
     }
-    if (need_clock){
-        if (need_Gaus){
+    if (need_clock)
+    {
+        if (need_Gaus)
+        {
             orig->rotate90Clockwise(fileName+"_rotC.bmp",1);
         }
-        else{
+        else
+        {
             orig->rotate90Clockwise(fileName+"_rotC.bmp",0);
         }
     }
