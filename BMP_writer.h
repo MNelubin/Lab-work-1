@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "string" 
+#include "string"
 #include "vector"
 
 int a;
