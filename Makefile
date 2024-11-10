@@ -18,7 +18,7 @@ LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
 
 DEPS=$(wildcard *.h)
 
-OBJ=BMP_reader.o BMP_writer.o
+OBJ=BMP_reader.o BMP_writer.o ImD.o
 
 TEST-OBJ=test-Transformers.o 
 
@@ -52,4 +52,5 @@ cleanall: clean
 	rm -f $(PROJECT)
 	rm -f $(LIBPROJECT)
 	rm -f $(TESTPROJECT)
+	rm -f massif*
 
