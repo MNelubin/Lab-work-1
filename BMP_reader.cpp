@@ -6,12 +6,6 @@
 #include "BMP_reader.h"
 #include "BMP_writer.h"
 
-
-
-
-
-
-
 int writeBMP(const std::string& fileName, const ImD& imageData)
 {
     std::ofstream file(fileName, std::ios::binary);
@@ -94,11 +88,6 @@ void ImD::rotate90ContClockwise(std::string rFileName)
 
 
 
-
-
-
-
-
 void ImD::rotate90Clockwise(std::string rFileName, bool WGaus)
 {
 
@@ -146,9 +135,6 @@ void ImD::rotate90Clockwise(std::string rFileName, bool WGaus)
     delete[] rotatedImage->pixels;
 
 }
-
-
-
 
 
 void ImD::applyGaussianFilter(ImD* image)
@@ -213,18 +199,6 @@ void ImD::applyGaussianFilter(ImD* image)
     delete[] newPixels;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_Gaus)
 {
@@ -334,33 +308,6 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
         fil_r.ignore(linePadding);
     }
 
-//
-//
-// вывод
-    /*
-     for (unsigned int i = 0; i < fileInfoHeader.biHeight; i++) {
-        for (unsigned int j = 0; j < fileInfoHeader.biWidth; j++) {
-            std::cout << std::hex
-                << +rgbInfo[i][j].rgbRed << " "
-                << +rgbInfo[i][j].rgbGreen << " "
-                << +rgbInfo[i][j].rgbBlue << " "
-                << +rgbInfo[i][j].rgbReserved
-                << std::endl;
-        }
-     std::cout << std::endl;
-     }
-    */
-
-
-//std::cout<<(int)rgbInfo[0][0].rgbRed<<(int)rgbInfo[0][0].rgbGreen<<(int)rgbInfo[0][0].rgbBlue<<(int)rgbInfo[0][0].rgbReserved<<std::endl;
-//std::cout<<fileInfoHeader.biBitCount;
-//writer(fileName,rgbInfo[fileInfoHeader.biHeight-1][fileInfoHeader.biWidth-1].rgbReserved);
-
-
-
-
-
-
     ImD* orig = new ImD(fileHeader,fileInfoHeader,rgbInfo,linePadding);
 
 
@@ -370,9 +317,7 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
     }
     delete[] rgbInfo;
 
-//std::cout<<fileInfoHeader.biBitCount;
-//std::cout<<fileInfoHeader.biBitCount;
-//writeBMP(fileName+"_new.bmp",*orig);
+
     if (need_contrclock){
         orig->rotate90ContClockwise(fileName+"_rotContC.bmp");
     }
@@ -385,31 +330,6 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
         }
     }
 
-    
 
-
-
-
-
-
-
-
-    /*
-    ImD *cartinka =new ImD(fileInfoHeader.biHeight,fileInfoHeader.biWidth,fileHeader.bfOffBits);
-    cartinka->hdr={'4d','4d'};
-    std::cout<<cartinka.hdr[0]<<cartinka.hdr[1]<<std::endl;
-    */
-    /*
-     std::string **fil = new std::string*[fileInfoHeader.biHeight];
-     fil[0]= new std::string[1];
-     for (unsigned int i = 1; i < fileInfoHeader.biHeight+1; i++) {
-         fil[i] = new RGBQUAD[fileInfoHeader.biWidth];
-     }
-     for (unsigned int i = 1; i < fileInfoHeader.biHeight+1; i++) {
-        for (unsigned int j = 0; j < fileInfoHeader.biWidth; j++) {
-
-            fil[i+1]=rgbInfo[i-1][j];
-     }
-    */
     return 1;
 }
