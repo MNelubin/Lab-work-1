@@ -21,21 +21,21 @@ int writeBMP(const std::string& fileName, const ImD& imageData)
         return -1;
     }
 
-    // Запись заголовка файла
+    
     file.write(reinterpret_cast<const char*>(&imageData.fileHeader.bfType), sizeof(imageData.fileHeader.bfType));
     file.write(reinterpret_cast<const char*>(&imageData.fileHeader.bfSize), sizeof(imageData.fileHeader.bfSize));
     file.write(reinterpret_cast<const char*>(&imageData.fileHeader.bfReserved1), sizeof(imageData.fileHeader.bfReserved1));
     file.write(reinterpret_cast<const char*>(&imageData.fileHeader.bfReserved2), sizeof(imageData.fileHeader.bfReserved2));
     file.write(reinterpret_cast<const char*>(&imageData.fileHeader.bfOffBits), sizeof(imageData.fileHeader.bfOffBits));
 
-    // Запись заголовка информации об изображении
+   
     file.write(reinterpret_cast<const char*>(&imageData.infoHeader), (int)imageData.infoHeader.biSize);
 
-    // Вычисление отступа (padding) для каждой строки
+   
     int linePadding = (4 - (imageData.infoHeader.biWidth * 3) % 4) % 4;
     unsigned char padding[3] = {0, 0, 0}; // Буфер для записи отступа
 
-    // Запись пикселей изображения
+    
     for (int i = 0; i < imageData.infoHeader.biHeight; ++i)
     {
         for (int j = 0; j < imageData.infoHeader.biWidth; ++j)
@@ -44,7 +44,7 @@ int writeBMP(const std::string& fileName, const ImD& imageData)
             file.write(reinterpret_cast<const char*>(&imageData.pixels[i][j].rgbGreen), sizeof(unsigned char));
             file.write(reinterpret_cast<const char*>(&imageData.pixels[i][j].rgbRed), sizeof(unsigned char));
         }
-        // Запись отступа в конце строки
+        
         file.write(reinterpret_cast<const char*>(padding), linePadding);
     }
 
@@ -63,18 +63,18 @@ void ImD::rotate90ContClockwise(std::string rFileName)
 
     ImD* rotatedImage = new ImD(*this);
 
-    // Обновляем ширину и высоту
+    
     rotatedImage->infoHeader.biWidth = this->infoHeader.biHeight;
     rotatedImage->infoHeader.biHeight = this->infoHeader.biWidth;
 
-    // Создаем новый массив для пикселей
+    
     rotatedImage->pixels = new RGBQUAD*[rotatedImage->infoHeader.biHeight];
     for (unsigned int i = 0; i < rotatedImage->infoHeader.biHeight; ++i)
     {
         rotatedImage->pixels[i] = new RGBQUAD[rotatedImage->infoHeader.biWidth];
     }
 
-    // Переносим пиксели с поворотом
+    
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
     {
         for (unsigned int j = 0; j < this->infoHeader.biWidth; ++j)
@@ -104,18 +104,18 @@ void ImD::rotate90Clockwise(std::string rFileName, bool WGaus)
 
     ImD* rotatedImage = new ImD(*this);
 
-    // Обновляем ширину и высоту
+    
     rotatedImage->infoHeader.biWidth = this->infoHeader.biHeight;
     rotatedImage->infoHeader.biHeight = this->infoHeader.biWidth;
 
-    // Создаем новый массив для пикселей
+    
     rotatedImage->pixels = new RGBQUAD*[rotatedImage->infoHeader.biHeight];
     for (unsigned int i = 0; i < rotatedImage->infoHeader.biHeight; ++i)
     {
         rotatedImage->pixels[i] = new RGBQUAD[rotatedImage->infoHeader.biWidth];
     }
 
-    // Переносим пиксели с поворотом
+    
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
     {
         for (unsigned int j = 0; j < this->infoHeader.biWidth; ++j)
@@ -153,21 +153,21 @@ void ImD::rotate90Clockwise(std::string rFileName, bool WGaus)
 
 void ImD::applyGaussianFilter(ImD* image)
 {
-    // Создаем копию массива пикселей, чтобы хранить результаты
+   
     RGBQUAD** newPixels = new RGBQUAD*[image->infoHeader.biHeight];
     for (unsigned int i = 0; i < image->infoHeader.biHeight; ++i)
     {
         newPixels[i] = new RGBQUAD[image->infoHeader.biWidth];
     }
 
-    // Обходим каждый пиксель изображения (исключая границы)
+    
     for (unsigned int y = 1; y < image->infoHeader.biHeight - 1; ++y)
     {
         for (unsigned int x = 1; x < image->infoHeader.biWidth - 1; ++x)
         {
             double red = 0.0, green = 0.0, blue = 0.0;
 
-            // Применяем Гауссово ядро к окружающим пикселям
+            
             for (int ky = -1; ky <= 1; ++ky)
             {
                 for (int kx = -1; kx <= 1; ++kx)
@@ -175,35 +175,23 @@ void ImD::applyGaussianFilter(ImD* image)
                     int pixelY = y + ky;
                     int pixelX = x + kx;
 
-                    // Доступ к текущему пикселю
+                    
                     RGBQUAD currentPixel = image->pixels[pixelY][pixelX];
 
-                    // Применяем ядро к каждому цветовому каналу
+                    
                     red += currentPixel.rgbRed * gaussianKernel[ky + 1][kx + 1];
                     green += currentPixel.rgbGreen * gaussianKernel[ky + 1][kx + 1];
                     blue += currentPixel.rgbBlue * gaussianKernel[ky + 1][kx + 1];
                 }
             }
 
-            // Записываем новые значения в массив newPixels
+            
             newPixels[y][x].rgbRed = static_cast<unsigned char>(red);
             newPixels[y][x].rgbGreen = static_cast<unsigned char>(green);
             newPixels[y][x].rgbBlue = static_cast<unsigned char>(blue);
         }
     }
 
-    /*
-        for (unsigned int y = 0; y < image->infoHeader.biHeight; ++y) {
-            for (unsigned int x = 0; x < image->infoHeader.biWidth; ++x) {
-                if (y == 0 || y == image->infoHeader.biHeight - 1 || x == 0 || x == image->infoHeader.biWidth - 1) {
-                    // Дублируем значение из ближайшего внутреннего пикселя
-                    newPixels[y][x] = image->pixels[y][x];
-                }
-            }
-        }
-    */
-
-    // Заменяем старые пиксели новыми
     for (unsigned int i = 0; i < image->infoHeader.biHeight; ++i)
     {
         newPixels[0][i]=newPixels[1][i];
@@ -216,30 +204,8 @@ void ImD::applyGaussianFilter(ImD* image)
 
     for (unsigned int i = 0; i < image->infoHeader.biHeight; ++i)
     {
-        /*
-        if (i=0){
-            delete[] image->pixels[i];
-            image->pixels[i] = newPixels[i+1];
-        }
-        else if (i=image->infoHeader.biHeight-1){
-            delete[] image->pixels[i];
-            image->pixels[i] = newPixels[i-1];
-        }
-        else {
-
-            newPixels[i][0]=newPixels[i][1];
-            newPixels[i][image->infoHeader.biWidth-1]=newPixels[i][image->infoHeader.biWidth-2];
-
-            delete[] image->pixels[i];
-            image->pixels[i] = newPixels[i];
-        }
-        */
         newPixels[i][0]=newPixels[i][1];
         newPixels[i][image->infoHeader.biWidth-1]=newPixels[i][image->infoHeader.biWidth-2];
-
-
-
-
         delete[] image->pixels[i];
 
         image->pixels[i] = newPixels[i];
@@ -265,9 +231,9 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
 
 
 
-// открываем файл
+
     std::ifstream fil_r(fileName, std::ifstream::binary);
-// заголовoк изображения
+
     BITMAPFILEHEADER fileHeader;
     read(fil_r, fileHeader.bfType, sizeof(fileHeader.bfType));
     read(fil_r, fileHeader.bfSize, sizeof(fileHeader.bfSize));
@@ -275,11 +241,11 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
     read(fil_r, fileHeader.bfReserved2, sizeof(fileHeader.bfReserved2));
     read(fil_r, fileHeader.bfOffBits, sizeof(fileHeader.bfOffBits));
 
-// информация изображения
+
     BITMAPINFOHEADER fileInfoHeader;
     read(fil_r, fileInfoHeader.biSize, sizeof(fileInfoHeader.biSize));
 
-// bmp core
+
     if (fileInfoHeader.biSize >= 12)
     {
         read(fil_r, fileInfoHeader.biWidth, sizeof(fileInfoHeader.biWidth));
@@ -288,7 +254,7 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
         read(fil_r, fileInfoHeader.biBitCount, sizeof(fileInfoHeader.biBitCount));
     }
 
-// получаем информацию о битности
+
     int colorsCount = fileInfoHeader.biBitCount >> 3;
     if (colorsCount < 3)
     {
@@ -298,7 +264,7 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
     int bitsOnColor = fileInfoHeader.biBitCount / colorsCount;
     int maskValue = (1 << bitsOnColor) - 1;
 
-// bmp v1
+
     if (fileInfoHeader.biSize >= 40)
     {
         read(fil_r, fileInfoHeader.biCompression, sizeof(fileInfoHeader.biCompression));
@@ -309,7 +275,7 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
         read(fil_r, fileInfoHeader.biClrImportant, sizeof(fileInfoHeader.biClrImportant));
     }
 
-// bmp v2
+
     fileInfoHeader.biRedMask = 0;
     fileInfoHeader.biGreenMask = 0;
     fileInfoHeader.biBlueMask = 0;
@@ -320,16 +286,6 @@ int reader(std::string fileName,bool need_clock,bool need_contrclock,bool need_G
         read(fil_r, fileInfoHeader.biGreenMask, sizeof(fileInfoHeader.biGreenMask));
         read(fil_r, fileInfoHeader.biBlueMask, sizeof(fileInfoHeader.biBlueMask));
     }
-
-/*
-    if (fileInfoHeader.biRedMask == 0 || fileInfoHeader.biGreenMask == 0 || fileInfoHeader.biBlueMask == 0)
-    {
-        fileInfoHeader.biRedMask = maskValue << (bitsOnColor * 2);
-        fileInfoHeader.biGreenMask = maskValue << bitsOnColor;
-        fileInfoHeader.biBlueMask = maskValue;
-    }
-*/
-
 
     if (fileInfoHeader.biSize >= 56)
     {
