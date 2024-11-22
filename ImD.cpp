@@ -1,3 +1,6 @@
+/* Maxim Nelyubin st132907@student.spbu.ru
+    Lab-1
+*/
 #include "ImD.h"
 
 
@@ -213,7 +216,6 @@ void ImD::applyGaussianFilter(const std::string& fileName)
         }
     }
 
-    // Обработка границ изображения
     for (unsigned int i = 0; i < infoHeader.biHeight; ++i)
     {
         newPixels[getIndex(0, i)] = newPixels[getIndex(1, i)];

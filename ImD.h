@@ -1,3 +1,6 @@
+/* Maxim Nelyubin st132907@student.spbu.ru
+    Lab-1
+*/
 #ifndef ImD_class
 #define ImD_class
 
