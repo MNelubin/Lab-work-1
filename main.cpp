@@ -2,7 +2,7 @@
     Lab-1
 */
 
-#include "BMP_reader.h"
+#include "ImD.h"
 
 //"examples_BMP/bmp_24.bmp"
 
@@ -41,6 +41,8 @@ int main()
         }
     }
 
-    reader(file_name,C,ConC,Gaus);
+    ImD Base;
+    Base.reader(file_name,C,ConC,Gaus);
+    Base.applyGaussianFilter(file_name);
     return 0;
 }

@@ -18,7 +18,7 @@ LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
 
 DEPS=$(wildcard *.h)
 
-OBJ=BMP_reader.o BMP_writer.o ImD.o
+OBJ=ImD.o
 
 TEST-OBJ=test-Transformers.o 
 
