@@ -7,6 +7,19 @@ void ImD::read(std::ifstream &fp, Type &result, std::size_t size)
     fp.read(reinterpret_cast<char*>(&result), size);
 }
 
+ImD::ImD(const ImD& image) : fileHeader(image.fileHeader), infoHeader(image.infoHeader), padding(image.padding)
+{
+    pixels = new RGBQUAD[infoHeader.biHeight * infoHeader.biWidth];
+    for (unsigned int i = 0; i < infoHeader.biHeight; ++i)
+    {
+        for (unsigned int j = 0; j < infoHeader.biWidth; ++j)
+        {
+            pixels[getIndex(j, i)] = image.pixels[image.getIndex(j, i)];
+        }
+    }
+}
+
+
 ImD::ImD()
     : fileHeader(), infoHeader(), pixels(nullptr), padding(0)
 {
@@ -66,12 +79,12 @@ void ImD::writeBMP(const std::string& fileName, const ImD& imageData)
 }
 void ImD::rotate90ContClockwise(const std::string rFileName)
 {
-    ImD* rotatedImage = new ImD(*this);
+    ImD* rotatedImage= new ImD(*this);
 
     rotatedImage->infoHeader.biWidth = infoHeader.biHeight;
     rotatedImage->infoHeader.biHeight = infoHeader.biWidth;
 
-    rotatedImage->pixels = new RGBQUAD[rotatedImage->infoHeader.biHeight * rotatedImage->infoHeader.biWidth];
+    //rotatedImage.pixels = new RGBQUAD[rotatedImage.infoHeader.biHeight * rotatedImage.infoHeader.biWidth];
 
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
     {
@@ -95,15 +108,15 @@ void ImD::rotate90ContClockwise(const std::string rFileName)
 void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 {
 
-    ImD* rotatedImage = new ImD(*this);
+    ImD* rotatedImage= new ImD(*this);
 
 
     rotatedImage->infoHeader.biWidth = infoHeader.biHeight;
     rotatedImage->infoHeader.biHeight = infoHeader.biWidth;
 
 
-    rotatedImage->pixels = new RGBQUAD[rotatedImage->infoHeader.biHeight*rotatedImage->infoHeader.biWidth];
-    
+    //rotatedImage.pixels = new RGBQUAD[rotatedImage.infoHeader.biHeight*rotatedImage->infoHeader.biWidth];
+    //rotatedImage->pixels = pixels;
 
 
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
@@ -122,7 +135,7 @@ void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 
         fileHeader=rotatedImage->fileHeader;
 
-        //delete[] pixels;
+        delete[] pixels;
 
         pixels=rotatedImage->pixels;
 
@@ -130,11 +143,11 @@ void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 
         padding=rotatedImage->padding;
 
-        delete rotatedImage;
+        //delete rotatedImage;
     }
     else{
-        delete rotatedImage;
     }
+    delete rotatedImage;
     /*
     for (unsigned int i=0; i<rotatedImage->infoHeader.biHeight; ++i)
         {
@@ -199,6 +212,10 @@ void ImD::applyGaussianFilter(const std::string& fileName)
 
 void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bool need_Gaus)
 {
+    if (pixels){
+        delete[] pixels;
+        pixels =nullptr;
+    }
     std::ifstream fil_r(fileName, std::ifstream::binary);
 
     if (!fil_r) {
@@ -297,19 +314,5 @@ void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bo
         fil_r.ignore(linePadding);
     }
     //writeBMP(fileName+"jjj.bmp",*this);
-    if (need_contrclock)
-    {
-        rotate90ContClockwise(fileName + "_rotContC.bmp");
-    }
-    if (need_clock)
-    {
-        if (need_Gaus)
-        {
-            rotate90Clockwise(fileName + "_rotC.bmp", true);
-        }
-        else
-        {
-            rotate90Clockwise(fileName + "_rotC.bmp", false);
-        }
-    }
+    
 }

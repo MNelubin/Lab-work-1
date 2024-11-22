@@ -88,6 +88,8 @@ private:
     };
 
 public:
+
+    ImD(const ImD& image);
     ImD();
     ImD(const BITMAPFILEHEADER& fh, const BITMAPINFOHEADER& ih, RGBQUAD* pixelData, int pad);
     ~ImD();
