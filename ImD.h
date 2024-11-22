@@ -103,8 +103,21 @@ public:
     template <typename Type>
     void read(std::ifstream &fp, Type &result, std::size_t size);
 
-    
-    int getIndex(int x, int y) const {
+    BITMAPINFOHEADER getInfoHeader();
+    BITMAPFILEHEADER getFileHeader();
+    void setHeight(unsigned int h);
+    void setWidth(unsigned int w);
+    unsigned int getWidth();
+
+    void setPixels_null();
+    int getPadding();
+    void setPixel_1(unsigned int cord,RGBQUAD Data);
+    void setPixel_all(RGBQUAD* Data);
+    RGBQUAD* getPixels_all();
+
+
+    int getIndex(int x, int y) const
+    {
         return y * infoHeader.biWidth + x;
     }
 };

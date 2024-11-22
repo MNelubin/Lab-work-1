@@ -40,12 +40,8 @@ int main()
             Gaus=1;
         }
     }
-    /*
-    ImD Base;
-    Base.reader(file_name,C,ConC,Gaus);
-    Base.applyGaussianFilter(file_name);
-    */
-    
+
+
     ImD *Base= new ImD;
     Base->reader(file_name,C,ConC,Gaus);
     Base->rotate90ContClockwise(file_name + "_rotContC.bmp");
@@ -54,7 +50,7 @@ int main()
     ImD *test= new ImD(*Base);
     delete Base;
     test->applyGaussianFilter(file_name);
-    delete test;	
-    
+    delete test;
+
     return 0;
 }

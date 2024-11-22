@@ -77,30 +77,49 @@ void ImD::writeBMP(const std::string& fileName, const ImD& imageData)
     file.close();
     std::cout << "Файл успешно записан: " << fileName << std::endl;
 }
+
+
+void ImD::setHeight(unsigned int h)
+{
+    this->infoHeader.biHeight =h;
+}
+void ImD::setWidth(unsigned int w)
+{
+    this->infoHeader.biWidth=w;
+}
+void ImD::setPixel_1(unsigned int cord,RGBQUAD Data)
+{
+    pixels[cord]=Data;
+}
+unsigned int ImD::getWidth()
+{
+    return infoHeader.biWidth;
+}
+
+
+
+
+
 void ImD::rotate90ContClockwise(const std::string rFileName)
 {
     ImD* rotatedImage= new ImD(*this);
 
-    rotatedImage->infoHeader.biWidth = infoHeader.biHeight;
-    rotatedImage->infoHeader.biHeight = infoHeader.biWidth;
-
-    //rotatedImage.pixels = new RGBQUAD[rotatedImage.infoHeader.biHeight * rotatedImage.infoHeader.biWidth];
+    rotatedImage->setWidth(infoHeader.biHeight);
+    rotatedImage->setHeight(infoHeader.biWidth);
 
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
     {
         for (unsigned int j = 0; j < this->infoHeader.biWidth; ++j)
         {
-            //std::cout<<i<<"--"<<j<<"--"<<rotatedImage->getIndex(j,i)<<"--"<<j * infoHeader.biWidth + i<<std::endl;
-            //rotatedImage->pixels[rotatedImage->getIndex(j,i)] = pixels[getIndex(i,this->infoHeader.biHeight-1-j)];
             int srcindx = i*infoHeader.biWidth+j;
-            int dest =(rotatedImage->infoHeader.biHeight-j-1)*rotatedImage->infoHeader.biWidth+i;
-            rotatedImage->pixels[dest]=pixels[srcindx];
+            int dest =(infoHeader.biWidth-j-1)*infoHeader.biHeight+i;
+            rotatedImage->setPixel_1(dest,pixels[srcindx]);
         }
 
     }
 
     rotatedImage->writeBMP(rFileName,*rotatedImage);
-    //delete[] rotatedImage->pixels;
+
     delete rotatedImage;
 }
 
@@ -111,19 +130,15 @@ void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
     ImD* rotatedImage= new ImD(*this);
 
 
-    rotatedImage->infoHeader.biWidth = infoHeader.biHeight;
-    rotatedImage->infoHeader.biHeight = infoHeader.biWidth;
-
-
-    //rotatedImage.pixels = new RGBQUAD[rotatedImage.infoHeader.biHeight*rotatedImage->infoHeader.biWidth];
-    //rotatedImage->pixels = pixels;
+    rotatedImage->setWidth(infoHeader.biHeight);
+    rotatedImage->setHeight(infoHeader.biWidth);
 
 
     for (unsigned int i = 0; i < this->infoHeader.biHeight; ++i)
     {
         for (unsigned int j = 0; j < this->infoHeader.biWidth; ++j)
         {
-            rotatedImage->pixels[rotatedImage->getIndex(rotatedImage->infoHeader.biWidth-1-i,j)] = this->pixels[getIndex(j,i)];
+            rotatedImage->setPixel_1(rotatedImage->getIndex(rotatedImage->getWidth()-1-i,j),pixels[getIndex(j,i)]);
         }
     }
 
@@ -131,33 +146,40 @@ void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 
     if (WGaus)
     {
-        infoHeader=rotatedImage->infoHeader;
+        infoHeader=rotatedImage->getInfoHeader();
 
-        fileHeader=rotatedImage->fileHeader;
+        fileHeader=rotatedImage->getFileHeader();
 
         delete[] pixels;
 
-        pixels=rotatedImage->pixels;
+        pixels=rotatedImage->getPixels_all();
 
-        rotatedImage->pixels = nullptr;
+        rotatedImage->setPixels_null();
 
-        padding=rotatedImage->padding;
+        padding=rotatedImage->getPadding();
 
-        //delete rotatedImage;
     }
-    else{
+    else
+    {
     }
     delete rotatedImage;
-    /*
-    for (unsigned int i=0; i<rotatedImage->infoHeader.biHeight; ++i)
-        {
-            delete [] rotatedImage->pixels[i];
-        }
-        delete[] rotatedImage->pixels;
-    delete rotatedImage;
-    */
-    
+}
 
+void ImD::setPixels_null()
+{
+    pixels=nullptr;
+}
+int ImD::getPadding()
+{
+    return padding;
+}
+void ImD::setPixel_all(RGBQUAD* Data)
+{
+    pixels=Data;
+}
+RGBQUAD* ImD::getPixels_all()
+{
+    return pixels;
 }
 
 
@@ -181,7 +203,6 @@ void ImD::applyGaussianFilter(const std::string& fileName)
 
                     RGBQUAD currentPixel = pixels[getIndex(pixelX, pixelY)];
 
-                    //std::cout<<"---------------"<<y<<x<<std::endl;
                     red += currentPixel.rgbRed * gaussianKernel[ky + 1][kx + 1];
                     green += currentPixel.rgbGreen * gaussianKernel[ky + 1][kx + 1];
                     blue += currentPixel.rgbBlue * gaussianKernel[ky + 1][kx + 1];
@@ -212,13 +233,15 @@ void ImD::applyGaussianFilter(const std::string& fileName)
 
 void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bool need_Gaus)
 {
-    if (pixels){
+    if (pixels)
+    {
         delete[] pixels;
         pixels =nullptr;
     }
     std::ifstream fil_r(fileName, std::ifstream::binary);
 
-    if (!fil_r) {
+    if (!fil_r)
+    {
         std::cerr << "Ошибка при открытии файла: " << fileName << std::endl;
         return;
     }
@@ -304,15 +327,20 @@ void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bo
     {
         for (int j = 0; j < infoHeader.biWidth; ++j)
         {
-            //std::cout<<i<<j<<std::endl;
-
-            //std::cout<<infoHeader.biHeight * infoHeader.biWidth<<"--"<<getIndex(j, i)<<std::endl;
             fil_r.read(reinterpret_cast<char*>(&pixels[getIndex(j, i)].rgbBlue), sizeof(unsigned char));
             fil_r.read(reinterpret_cast<char*>(&pixels[getIndex(j, i)].rgbGreen), sizeof(unsigned char));
             fil_r.read(reinterpret_cast<char*>(&pixels[getIndex(j, i)].rgbRed), sizeof(unsigned char));
         }
         fil_r.ignore(linePadding);
     }
-    //writeBMP(fileName+"jjj.bmp",*this);
-    
+}
+
+
+BITMAPINFOHEADER ImD::getInfoHeader()
+{
+    return infoHeader;
+}
+BITMAPFILEHEADER ImD::getFileHeader()
+{
+    return fileHeader;
 }
