@@ -17,7 +17,7 @@ ARFLAGS = rcs
 # Base CXXFLAGS
 CXXFLAGS_BASE = -I$(INC_DIR) -std=c++17 -Wall -g -fPIC -Werror -Wpedantic
 # OpenMP flags
-OMPFLAGS = -fopenmp
+OMPFLAGS = -fopenmp -O3
 # Application specific CXXFLAGS
 CXXFLAGS = $(CXXFLAGS_BASE) $(OMPFLAGS) -DPROJECT_NAME="\"$(PROJECT)\""
 
@@ -88,7 +88,7 @@ $(TEST_OBJ): %.o: $(TEST_DIR)/%.cpp $(DEPS)
 # Clean rules
 clean:
 	@echo "Cleaning object files..."
-	rm -f $(APP_OBJ) $(LIB_OBJ) $(TEST_OBJ)
+	rm -f $(APP_OBJ) $(LIB_OBJ) test-$(PROJECT).o
 
 cleanall: clean
 	@echo "Cleaning executables and library..."
