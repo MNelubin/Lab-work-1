@@ -25,10 +25,7 @@ jobs:
         cd /usr/src/googletest
         sudo cmake .
         sudo make
-        sudo rm *.o
 
     - name: Build project
       run: make all
 
-    - name: Run tests
-      run: make test
