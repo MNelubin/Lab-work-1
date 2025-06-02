@@ -1,0 +1,27 @@
+var struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r =
+[
+    [ "biAlphaMask", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a530a0c6f213be75b20d762a9d89e4b67", null ],
+    [ "biBitCount", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a47691b5f4c0134052b6d3a80d465f2cf", null ],
+    [ "biBlueMask", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a2cb9a01c9f2913aa6b96bebf6c72067b", null ],
+    [ "biClrImportant", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ae7adc2ed23322a8871819f2a745c7208", null ],
+    [ "biClrUsed", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ae5fa6e54097b9f16ada07e7295f0b64a", null ],
+    [ "biCompression", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a306b18cffc38667d762180194ad350b1", null ],
+    [ "biCSType", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#adbbf377670f3cac578861bce3679a7a2", null ],
+    [ "biEndpoints", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ad3cc60d70153681a8f4d923eccc626ec", null ],
+    [ "biGammaBlue", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ab0ba5b16e097c58ff6bc112153d71924", null ],
+    [ "biGammaGreen", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#af1e1ed5a5e6d5314da0f558f77efc0bc", null ],
+    [ "biGammaRed", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a8e91d92cb7ea78072475c3faf75e2030", null ],
+    [ "biGreenMask", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a1b3c6efa6365f95c6c7fec6bedeb0921", null ],
+    [ "biHeight", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a6139ba5f96cde2500fc11765b3fac549", null ],
+    [ "biIntent", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#af6cbf421b5b8293f108979e1ff05dfb2", null ],
+    [ "biPlanes", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a4cef07f479171ad423347bd2f2b21d3a", null ],
+    [ "biProfileData", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a019787fe302f41989c076dea93b2ab24", null ],
+    [ "biProfileSize", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a29b76419225e62de552ec790ec6e03d2", null ],
+    [ "biRedMask", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a2945200f9b635b3c391161799431d0e3", null ],
+    [ "biReserved", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a7b3e2b585ae4d01fedae21769989be17", null ],
+    [ "biSize", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a062630d1d627313aae6cc583d5528406", null ],
+    [ "biSizeImage", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a09873a2fd9d100b1717a42062b3c3268", null ],
+    [ "biWidth", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a053b8b04efa1ec50cedaa7e51d897286", null ],
+    [ "biXPelsPerMeter", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a72af8d43031875294501c8888345e3a2", null ],
+    [ "biYPelsPerMeter", "d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a745b3a2922b4609efe72f829c7c8621e", null ]
+];

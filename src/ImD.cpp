@@ -4,13 +4,23 @@
 #include "ImD.h"
 #include <omp.h>
 
+/**
+ * @brief Template function to read data of a specific type from an input file stream.
+ * @tparam Type The data type to read.
+ * @param fp The input file stream.
+ * @param result Reference to store the read data.
+ * @param size The number of bytes to read.
+ */
 template <typename Type>
 void ImD::read(std::ifstream &fp, Type &result, std::size_t size)
 {
     fp.read(reinterpret_cast<char*>(&result), size);
 }
 
-// Copy constructor
+/**
+ * @brief Copy constructor.
+ * @param image The ImD object to copy.
+ */
 ImD::ImD(const ImD& image) : fileHeader(image.fileHeader), infoHeader(image.infoHeader), padding(image.padding)
 {
     const unsigned int total_pixels = image.infoHeader.biHeight * image.infoHeader.biWidth;
@@ -33,13 +43,22 @@ ImD::ImD(const ImD& image) : fileHeader(image.fileHeader), infoHeader(image.info
     }
 }
 
-// Default constructor
+/**
+ * @brief Default constructor.
+ * Initializes an empty ImD object.
+ */
 ImD::ImD()
     : fileHeader(), infoHeader(), pixels(nullptr), padding(0)
 {
 }
 
-// Constructor with parameters
+/**
+ * @brief Constructor with parameters.
+ * @param fh The BITMAPFILEHEADER for the image.
+ * @param ih The BITMAPINFOHEADER for the image.
+ * @param pixelData Pointer to the RGBQUAD pixel data.
+ * @param pad The padding value for the image rows.
+ */
 ImD::ImD(const BITMAPFILEHEADER& fh, const BITMAPINFOHEADER& ih, RGBQUAD* pixelData, int pad)
     : fileHeader(fh), infoHeader(ih), padding(pad)
 {
@@ -54,13 +73,20 @@ ImD::ImD(const BITMAPFILEHEADER& fh, const BITMAPINFOHEADER& ih, RGBQUAD* pixelD
     }
 }
 
-// Destructor
+/**
+ * @brief Destructor.
+ * Frees the allocated memory for pixel data.
+ */
 ImD::~ImD()
 {
     delete[] pixels;
 }
 
-// Copy assignment operator
+/**
+ * @brief Copy assignment operator.
+ * @param other The ImD object to assign from.
+ * @return Reference to this ImD object.
+ */
 ImD& ImD::operator=(const ImD& other)
 {
     if (this == &other)
@@ -105,7 +131,11 @@ ImD& ImD::operator=(const ImD& other)
     return *this;
 }
 
-// Writes BMP image data to a file.
+/**
+ * @brief Writes BMP image data to a file.
+ * @param fileName The name of the file to write the BMP image to.
+ * @param imageData The ImD object containing the image data to write.
+ */
 void ImD::writeBMP(const std::string& fileName, const ImD& imageData)
 {
     std::ofstream file(fileName, std::ios::binary);
@@ -148,44 +178,68 @@ void ImD::writeBMP(const std::string& fileName, const ImD& imageData)
     file.close();
 }
 
-// Sets the height of the image.
+/**
+ * @brief Sets the height of the image.
+ * @param h The new height.
+ */
 void ImD::setHeight(unsigned int h)
 {
     this->infoHeader.biHeight = h;
 }
 
-// Sets the width of the image.
+/**
+ * @brief Sets the width of the image.
+ * @param w The new width.
+ */
 void ImD::setWidth(unsigned int w)
 {
     this->infoHeader.biWidth = w;
 }
 
-// Sets a single pixel's data at a given coordinate (1D index).
+/**
+ * @brief Sets a single pixel's data at a given 1D coordinate.
+ * @param cord The 1D index of the pixel.
+ * @param Data The RGBQUAD data for the pixel.
+ */
 void ImD::setPixel_1(unsigned int cord, RGBQUAD Data)
 {
     pixels[cord] = Data;
 }
 
-// Gets the width of the image.
+/**
+ * @brief Gets the width of the image.
+ * @return The width of the image in pixels.
+ */
 unsigned int ImD::getWidth()
 {
     return infoHeader.biWidth;
 }
 
-// Gets the height of the image.
+/**
+ * @brief Gets the height of the image.
+ * @return The height of the image in pixels.
+ */
 unsigned int ImD::getHeight()
 {
     return infoHeader.biHeight;
 }
 
-// Calculates 1D index from 2D coordinates.
+/**
+ * @brief Calculates the 1D index from 2D coordinates.
+ * @param x The x-coordinate (column).
+ * @param y The y-coordinate (row).
+ * @return The 1D index in the pixel array.
+ */
 unsigned int ImD::getIndex(unsigned int x, unsigned int y) const
 {
     return y * infoHeader.biWidth + x;
 }
 
 
-// Sequential 90 deg counterclockwise rotation
+/**
+ * @brief Rotates the image 90 degrees counter-clockwise (sequential).
+ * @param rFileName The name of the file to save the rotated image to.
+ */
 void ImD::rotate90ContClockwise(const std::string rFileName)
 {
     if (this->pixels == nullptr && this->infoHeader.biHeight > 0 && this->infoHeader.biWidth > 0)
@@ -243,6 +297,11 @@ void ImD::rotate90ContClockwise(const std::string rFileName)
 
 
 // Sequential 90 deg clockwise rotation
+/**
+ * @brief Rotates the image 90 degrees clockwise (sequential).
+ * @param rFileName The name of the file to save the rotated image to.
+ * @param WGaus If true, applies Gaussian filter after rotation (default is false).
+ */
 void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 {
     if (this->pixels == nullptr && this->infoHeader.biHeight > 0 && this->infoHeader.biWidth > 0)
@@ -299,24 +358,40 @@ void ImD::rotate90Clockwise(const std::string rFileName, bool WGaus)
 }
 
 // Sets the pixel data pointer to null.
+/**
+ * @brief Sets the internal pixel pointer to nullptr.
+ * This is typically used when transferring ownership or clearing data.
+ */
 void ImD::setPixels_null()
 {
     pixels=nullptr;
 }
 
 // Gets the padding of the image.
+/**
+ * @brief Gets the padding bytes for each row.
+ * @return The padding value.
+ */
 int ImD::getPadding()
 {
     return padding;
 }
 
 // Sets the entire pixel array.
+/**
+ * @brief Sets all pixel data from a given array.
+ * @param Data Pointer to the new RGBQUAD pixel data array.
+ */
 void ImD::setPixel_all(RGBQUAD* Data)
 {
     pixels=Data;
 }
 
 // Gets the pointer to the entire pixel array.
+/**
+ * @brief Gets a pointer to all pixel data.
+ * @return Pointer to the RGBQUAD pixel data array.
+ */
 RGBQUAD* ImD::getPixels_all()
 {
     return pixels;
@@ -324,6 +399,10 @@ RGBQUAD* ImD::getPixels_all()
 
 
 // Sequential Gaussian filter
+/**
+ * @brief Applies a Gaussian filter to the image (sequential).
+ * @param fileName The name of the file to save the filtered image to.
+ */
 void ImD::applyGaussianFilter(const std::string& fileName)
 {
     const unsigned int total_pixels = infoHeader.biHeight * infoHeader.biWidth;
@@ -411,6 +490,13 @@ void ImD::applyGaussianFilter(const std::string& fileName)
 }
 
 // Reads BMP image data from a file.
+/**
+ * @brief Reads a BMP image from a file.
+ * @param fileName The name of the BMP file to read.
+ * @param need_clock Flag indicating if clockwise rotation is needed (currently unused in this method's direct logic but might be for subsequent calls).
+ * @param need_contrclock Flag indicating if counter-clockwise rotation is needed (currently unused).
+ * @param need_Gaus Flag indicating if Gaussian filter is needed (currently unused).
+ */
 void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bool need_Gaus)
 {
     if (pixels)
@@ -591,12 +677,20 @@ void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bo
 }
 
 // Gets the BITMAPINFOHEADER of the image.
+/**
+ * @brief Gets the BMP info header.
+ * @return The BITMAPINFOHEADER structure.
+ */
 BITMAPINFOHEADER ImD::getInfoHeader()
 {
     return infoHeader;
 }
 
 // Parallel Gaussian filter
+/**
+ * @brief Applies a Gaussian filter to the image (parallel using OpenMP).
+ * @param fileName The name of the file to save the filtered image to.
+ */
 void ImD::applyGaussianFilter_parallel(const std::string& fileName)
 {
     const unsigned int total_pixels = infoHeader.biHeight * infoHeader.biWidth;
@@ -662,6 +756,10 @@ void ImD::applyGaussianFilter_parallel(const std::string& fileName)
 }
 
 // Parallel 90 deg counterclockwise rotation
+/**
+ * @brief Rotates the image 90 degrees counter-clockwise (parallel using OpenMP).
+ * @param rFileName The name of the file to save the rotated image to.
+ */
 void ImD::rotate90ContClockwise_parallel(const std::string rFileName)
 {
     if (this->pixels == nullptr && this->infoHeader.biHeight > 0 && this->infoHeader.biWidth > 0)
@@ -718,6 +816,11 @@ void ImD::rotate90ContClockwise_parallel(const std::string rFileName)
 }
 
 // Parallel 90 deg clockwise rotation
+/**
+ * @brief Rotates the image 90 degrees clockwise (parallel using OpenMP).
+ * @param rFileName The name of the file to save the rotated image to.
+ * @param WGaus If true, applies Gaussian filter after rotation (default is false).
+ */
 void ImD::rotate90Clockwise_parallel(const std::string rFileName, bool WGaus)
 {
     if (this->pixels == nullptr && this->infoHeader.biHeight > 0 && this->infoHeader.biWidth > 0)
@@ -775,6 +878,10 @@ void ImD::rotate90Clockwise_parallel(const std::string rFileName, bool WGaus)
 }
 
 // Gets the BITMAPFILEHEADER of the image.
+/**
+ * @brief Gets the BMP file header.
+ * @return The BITMAPFILEHEADER structure.
+ */
 BITMAPFILEHEADER ImD::getFileHeader()
 {
     return fileHeader;

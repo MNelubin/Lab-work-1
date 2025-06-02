@@ -1,0 +1,101 @@
+\doxysection{main.\+cpp}
+\hypertarget{main_8cpp_source}{}\label{main_8cpp_source}\index{D:/education/C++/first semestr/Lab-\/work-\/1-\/main/Lab-\/work-\/1-\/main/main.cpp@{D:/education/C++/first semestr/Lab-\/work-\/1-\/main/Lab-\/work-\/1-\/main/main.cpp}}
+\mbox{\hyperlink{main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001\ \textcolor{comment}{/*\ Maxim\ Nelyubin\ st132907@student.spbu.ru}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002\ \textcolor{comment}{\ \ \ \ Lab-\/1}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_im_d_8h}{ImD.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008\ \textcolor{comment}{//"{}examples\_BMP/bmp\_24.bmp"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00010}00010\ \textcolor{comment}{//"{}examples\_BMP/sample1.bmp"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00012}\mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00012}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00014}00014\ \ \ \ \ std::string\ file\_name;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ C;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ ConC;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ Gaus\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00018}00018\ \ \ \ \ std::string\ input;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}00019\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}What\ file\ path?\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00020}00020\ \ \ \ \ std::cin>>file\_name;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}00021\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Do\ you\ need\ rotated\ images?\ (1/0)\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}00022\ \ \ \ \ std::cin>>input;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{if}\ (input==\textcolor{stringliteral}{"{}0"{}})}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ ConC=C=0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ ConC=C=1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (C)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Do\ you\ need\ rotated\ image\ with\ Gaus\ filtration?\ (1/0)\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ std::cin>>input;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (input==\textcolor{stringliteral}{"{}0"{}})}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ Gaus=0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ Gaus=1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{class_im_d}{ImD}}\ *Base=\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \ \ Base-\/>\mbox{\hyperlink{class_im_d_a4b13c58e1e60becfd04f3c8862493f22}{reader}}(file\_name,C,ConC,Gaus);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ Sequential\ methods\ timing}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{auto}\ start\_seq\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051\ \ \ \ \ Base-\/>\mbox{\hyperlink{class_im_d_ae8deb753982b031c4c06152924e4cd31}{rotate90ContClockwise}}(file\_name\ +\ \textcolor{stringliteral}{"{}\_rotContC.bmp"{}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052\ \ \ \ \ Base-\/>\mbox{\hyperlink{class_im_d_a4b13c58e1e60becfd04f3c8862493f22}{reader}}(file\_name,C,ConC,Gaus);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053\ \ \ \ \ Base-\/>\mbox{\hyperlink{class_im_d_a4c5fa1b18d4009534f463688e197662d}{rotate90Clockwise}}(file\_name+\textcolor{stringliteral}{"{}\_rotC.bmp"{}},\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{class_im_d}{ImD}}\ *test=\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}}(*Base);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055\ \ \ \ \ test-\/>\mbox{\hyperlink{class_im_d_a900b3125e4eb7a2ed3336a422cf95d9a}{applyGaussianFilter}}(file\_name);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{auto}\ end\_seq\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057\ \ \ \ \ std::chrono::duration<double>\ duration\_seq\ =\ end\_seq\ -\/\ start\_seq;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Sequential\ methods\ time:\ "{}}\ <<\ duration\_seq.count()\ <<\ \textcolor{stringliteral}{"{}\ seconds\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{delete}\ Base;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Parallel\ methods\ timing}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061\ \ \ \ \ Base\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062\ \ \ \ \ Base-\/>\mbox{\hyperlink{class_im_d_a4b13c58e1e60becfd04f3c8862493f22}{reader}}(file\_name,C,ConC,Gaus);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{auto}\ start\_par\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ omp\ parallel\ sections}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ omp\ section}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_im_d}{ImD}}*\ img1\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}}(*Base);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ img1-\/>\mbox{\hyperlink{class_im_d_a7a5e5ed4f95deccf1d03c913d63cc588}{rotate90ContClockwise\_parallel}}(file\_name\ +\ \textcolor{stringliteral}{"{}\_rotContC\_parallel.bmp"{}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ img1;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ omp\ section}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_im_d}{ImD}}*\ img2\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}}(*Base);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ img2-\/>\mbox{\hyperlink{class_im_d_ae85273334f7da3480b0ed1a7c34f72a8}{rotate90Clockwise\_parallel}}(file\_name+\textcolor{stringliteral}{"{}\_rotC\_parallel.bmp"{}},\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ img2;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ omp\ section}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_im_d}{ImD}}*\ img3\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_im_d}{ImD}}(*Base);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ img3-\/>\mbox{\hyperlink{class_im_d_ad6ef6f22023fbbaaf63bfb165d78daf6}{applyGaussianFilter\_parallel}}(file\_name\ +\ \textcolor{stringliteral}{"{}\_WGaus\_parallel.bmp"{}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ img3;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keyword}{auto}\ end\_par\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00090}00090\ \ \ \ \ std::chrono::duration<double>\ duration\_par\ =\ end\_par\ -\/\ start\_par;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00091}00091\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Parallel\ methods\ time:\ "{}}\ <<\ duration\_par.count()\ <<\ \textcolor{stringliteral}{"{}\ seconds\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{delete}\ Base;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00095}00095\ \}}
+
+\end{DoxyCode}

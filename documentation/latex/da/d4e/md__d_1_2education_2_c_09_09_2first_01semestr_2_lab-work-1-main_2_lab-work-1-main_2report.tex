@@ -1,0 +1,28 @@
+\chapter{Lab Work 1 Report\+: Parallel Image Processing}
+\hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report}{}\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report}\index{Lab Work 1 Report: Parallel Image Processing@{Lab Work 1 Report: Parallel Image Processing}}
+\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md6}%
+\Hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md6}%
+\hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md7}{}\doxysection{\texorpdfstring{Task Description}{Task Description}}\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md7}
+Update the solution for Lab Work 1 (image processing from the first semester) by adding parallelism to the implementation. Note that rewriting the code from scratch is not considered a solution.
+
+Conduct a reproducible experiment that justifies that the new solution works faster than the old one, and write a report on it.\hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md8}{}\doxysection{\texorpdfstring{Experiment Results}{Experiment Results}}\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md8}
+The following results were obtained from running the program\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{max@MaxLaptop:/mnt/d/education/C++/first\ semestr/Lab-\/work-\/1-\/main/Lab-\/work-\/1-\/main\$\ ./lgo\ }
+\DoxyCodeLine{What\ file\ path?\ }
+\DoxyCodeLine{examples\_BMP/sample1.bmp\ }
+\DoxyCodeLine{Do\ you\ need\ rotated\ images?\ (1/0)\ }
+\DoxyCodeLine{1\ }
+\DoxyCodeLine{Do\ you\ need\ rotated\ image\ with\ Gaus\ filtration?\ (1/0)\ }
+\DoxyCodeLine{1\ }
+\DoxyCodeLine{Sequential\ methods\ time:\ 0.553313\ seconds\ }
+\DoxyCodeLine{Parallel\ methods\ time:\ 0.0758145\ seconds}
+
+\end{DoxyCode}
+\hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md9}{}\doxysection{\texorpdfstring{Analysis}{Analysis}}\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md9}
+The experiment clearly shows a significant performance improvement when using parallel processing methods compared to sequential methods. The parallel execution time (0.\+0758145 seconds) is substantially lower than the sequential execution time (0.\+553313 seconds) for the given image processing tasks (rotation and Gaussian filtering) on the {\ttfamily sample1.\+bmp} image.
+
+This speedup is achieved by leveraging multiple processor cores to perform computations concurrently, as implemented using Open\+MP in the C++ code. The parallel versions of {\ttfamily rotate90\+Clockwise}, {\ttfamily rotate90\+Cont\+Clockwise}, and {\ttfamily apply\+Gaussian\+Filter} distribute the workload across available threads, leading to a faster overall execution time.\hypertarget{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md10}{}\doxysection{\texorpdfstring{Conclusion}{Conclusion}}\label{md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report_autotoc_md10}
+The addition of parallelism to the image processing solution has successfully resulted in a more performant application. The experimental results validate that the parallel implementation is significantly faster than the original sequential version, fulfilling the requirements of the task. 
