@@ -19,7 +19,8 @@ CXXFLAGS_BASE = -I$(INC_DIR) -std=c++17 -Wall -g -fPIC -Werror -Wpedantic
 # OpenMP flags
 OMPFLAGS = -fopenmp -O3
 # Application specific CXXFLAGS
-CXXFLAGS = $(CXXFLAGS_BASE) $(OMPFLAGS) -DPROJECT_NAME="\"$(PROJECT)\""
+CXXFLAGS_COMPILE = $(CXXFLAGS_BASE) $(OMPFLAGS) -DPROJECT_NAME="\"$(PROJECT)\"" -isystem /usr/lib/gcc/x86_64-linux-gnu/13/include
+CXXFLAGS_LINT = $(CXXFLAGS_BASE) $(OMPFLAGS) -DPROJECT_NAME="\"$(PROJECT)\"" -I$(INC_DIR)
 
 # Linker flags
 # Base LDLIBS
@@ -42,7 +43,7 @@ TEST_OBJ = $(notdir $(TEST_SRC_FILES:.cpp=.o))
 DEPS = $(wildcard $(INC_DIR)/*.h)
 
 # Targets
-.PHONY: all test clean cleanall info
+.PHONY: all test clean cleanall info lint
 
 default: all
 
@@ -54,7 +55,7 @@ info:
 # Build application
 $(PROJECT): $(APP_OBJ) $(LIBPROJECT)
 	@echo "Linking application $(PROJECT)..."
-	$(CXX) $(CXXFLAGS) -o $@ $(APP_OBJ) $(LIBPROJECT) $(LDAPPFLAGS)
+	$(CXX) $(CXXFLAGS_COMPILE) -o $@ $(APP_OBJ) $(LIBPROJECT) $(LDAPPFLAGS)
 
 # Build library
 $(LIBPROJECT): $(LIB_OBJ)
@@ -64,7 +65,7 @@ $(LIBPROJECT): $(LIB_OBJ)
 # Build tests
 $(TESTPROJECT): $(TEST_OBJ) $(LIBPROJECT)
 	@echo "Linking test executable $(TESTPROJECT)..."
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_OBJ) $(LIBPROJECT) $(LDGTESTFLAGS)
+	$(CXX) $(CXXFLAGS_COMPILE) -o $@ $(TEST_OBJ) $(LIBPROJECT) $(LDGTESTFLAGS)
 
 test: $(TESTPROJECT)
 	@echo "Running unit tests (if $(TESTPROJECT) exists and is runnable)..."
@@ -73,17 +74,17 @@ test: $(TESTPROJECT)
 # Rule to compile application source file (main.cpp from root)
 $(APP_OBJ): %.o: %.cpp $(DEPS)
 	@echo "Compiling $< -> $@..."
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS_COMPILE) -c -o $@ $<
 
 # Rule to compile library source files (from SRC_DIR)
 $(LIB_OBJ): %.o: $(SRC_DIR)/%.cpp $(DEPS)
 	@echo "Compiling $< -> $@..."
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS_COMPILE) -c -o $@ $<
 
 # Rule to compile test source file (from TEST_DIR)
 $(TEST_OBJ): %.o: $(TEST_DIR)/%.cpp $(DEPS) 
 	@echo "Compiling test source $< -> $@..."
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS_COMPILE) -c -o $@ $<
 
 # Clean rules
 clean:
@@ -94,4 +95,8 @@ cleanall: clean
 	@echo "Cleaning executables and library..."
 	rm -f $(PROJECT) $(LIBPROJECT) $(TESTPROJECT)
 	rm -f massif*
+
+lint:
+	@echo "Running Clang-Tidy..."
+	clang-tidy $(APP_SRC) $(LIB_SRC) $(TEST_DIR)/test-$(PROJECT).cpp -- $(CXXFLAGS_LINT)
 

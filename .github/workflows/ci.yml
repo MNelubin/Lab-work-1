@@ -29,3 +29,18 @@ jobs:
     - name: Build project
       run: make all
 
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup environment for lint
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-tidy
+
+    - name: Run Clang-Tidy
+      run: make lint
+

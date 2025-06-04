@@ -6,6 +6,22 @@ Update the solution for Lab Work 1 (image processing from the first semester) by
 
 Conduct a reproducible experiment that justifies that the new solution works faster than the old one, and write a report on it.
 
+## Hardware Specifications
+
+The experiment was conducted on the following hardware:
+
+- **Storage:** 954 GB (674 GB used)
+- **Video Adapter:** 128 MB Intel(R) Iris(R) Xe Graphics
+- **RAM:** 32.0 GB, Speed: 6400 MHz
+- **Processor:** 13th Gen Intel(R) Core(TM) i9-13900H @ 2.60 GHz
+
+## Images Used for Experiment
+
+The tests were performed on the following images:
+
+- <mcfile path="examples_BMP/bmp_24.bmp" name="examples_BMP/bmp_24.bmp"></mcfile>
+- <mcfile path="examples_BMP/sample1.bmp" name="examples_BMP/sample1.bmp"></mcfile>
+
 ## Experiment Results
 
 The following results were obtained from running the program:
