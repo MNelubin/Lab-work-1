@@ -1,4 +1,8 @@
 # Lab-work-1
+
+! [Build Status](https://github.com/MNelubin/Lab-work-1/actions/workflows/ci.yml/badge.svg)
+! [Coverage Status](https://coveralls.io/repos/github/MNelubin/Lab-work-1/badge.svg?branch=master)](https://coveralls.io/github/MNelubin/Lab-work-1?branch=master)
+
 ## Author
 
 Maxim Nelyubin 24.Б82-ММ
@@ -9,12 +13,18 @@ st132907@student.spbu.ru
 
 ## Description
 
-Lab-work 1 - reading, rotating and applying Gaus filtration
+Implementation of an Image Processing Library.
+
+## Documentation
+
+https://mnelubin.github.io/Lab-work-1/
 
 ## Build
 
-make  - for compiling main.cpp 
+`make` - for compiling `main.cpp`
+`make test` - for compiling `test-lgo.cpp`
 
 ## Run
 
-./lgo - for running main()
+`./main` - for running `main()`
+`./test-lgo` - for running tests
