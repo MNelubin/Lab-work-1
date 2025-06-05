@@ -1,7 +1,7 @@
 # Lab-work-1
 
-! [Build Status](https://github.com/MNelubin/Lab-work-1/actions/workflows/ci.yml/badge.svg)
-! [Coverage Status](https://coveralls.io/repos/github/MNelubin/Lab-work-1/badge.svg?branch=master)](https://coveralls.io/github/MNelubin/Lab-work-1?branch=master)
+![Build Status](https://github.com/MNelubin/Lab-work-1/actions/workflows/ci.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/MNelubin/Lab-work-1/badge.svg?branch=master)](https://coveralls.io/github/MNelubin/Lab-work-1?branch=master)
 
 ## Author
 
@@ -13,7 +13,7 @@ st132907@student.spbu.ru
 
 ## Description
 
-Implementation of an Image Processing Library.
+Implementation of an Image Processing program.
 
 ## Documentation
 
