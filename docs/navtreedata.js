@@ -26,14 +26,17 @@ var NAVTREE =
 [
   [ "BMP", "index.html", [
     [ "Lab Work 1 Report: Parallel Image Processing", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html", [
-      [ "Task Description", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md7", null ],
-      [ "Experiment Results", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md8", null ],
-      [ "Analysis", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md9", null ],
-      [ "Conclusion", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md10", null ]
+      [ "Task Description", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md8", null ],
+      [ "Hardware Specifications", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md9", null ],
+      [ "Images Used for Experiment", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md10", null ],
+      [ "Experiment Results", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md11", null ],
+      [ "Analysis", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md12", null ],
+      [ "Conclusion", "da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2_lab-work-1-main_2_lab-work-1-main_2report.html#autotoc_md13", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],

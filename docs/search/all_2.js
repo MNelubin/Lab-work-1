@@ -31,5 +31,5 @@ var searchData=
   ['biwidth_28',['biWidth',['../d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a053b8b04efa1ec50cedaa7e51d897286',1,'BITMAPINFOHEADER']]],
   ['bixpelspermeter_29',['biXPelsPerMeter',['../d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a72af8d43031875294501c8888345e3a2',1,'BITMAPINFOHEADER']]],
   ['biypelspermeter_30',['biYPelsPerMeter',['../d0/db2/struct_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a745b3a2922b4609efe72f829c7c8621e',1,'BITMAPINFOHEADER']]],
-  ['build_31',['Build',['../D:/education/C++/first semestr/Lab-work-1-main/Lab-work-1-main/README.md#autotoc_md4',1,'']]]
+  ['build_31',['Build',['../D:/education/C++/first semestr/Lab-work-1-main/Lab-work-1-main/README.md#autotoc_md5',1,'']]]
 ];

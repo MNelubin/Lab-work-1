@@ -105,12 +105,28 @@ $(function(){initNavTree('da/d4e/md__d_1_2education_2_c_09_09_2first_01semestr_2
   <div class="headertitle"><div class="title">Lab Work 1 Report: Parallel Image Processing</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md6"></a></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md7"></a></p>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Task Description</h1>
 <p>Update the solution for Lab Work 1 (image processing from the first semester) by adding parallelism to the implementation. Note that rewriting the code from scratch is not considered a solution.</p>
 <p>Conduct a reproducible experiment that justifies that the new solution works faster than the old one, and write a report on it.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Hardware Specifications</h1>
+<p>The experiment was conducted on the following hardware:</p>
+<ul>
+<li><b>Storage:</b> 954 GB (674 GB used)</li>
+<li><b>Video Adapter:</b> 128 MB Intel(R) Iris(R) Xe Graphics</li>
+<li><b>RAM:</b> 32.0 GB, Speed: 6400 MHz</li>
+<li><b>Processor:</b> 13th Gen Intel(R) Core(TM) i9-13900H @ 2.60 GHz</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Images Used for Experiment</h1>
+<p>The tests were performed on the following images:</p>
+<ul>
+<li>"examples_BMP/bmp_24.bmp"</li>
+<li>"examples_BMP/sample1.bmp"</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Experiment Results</h1>
 <p>The following results were obtained from running the program:</p>
 <div class="fragment"><div class="line">max@MaxLaptop:/mnt/d/education/C++/first semestr/Lab-work-1-main/Lab-work-1-main$ ./lgo </div>
@@ -122,11 +138,11 @@ Experiment Results</h1>
 <div class="line">1 </div>
 <div class="line">Sequential methods time: 0.553313 seconds </div>
 <div class="line">Parallel methods time: 0.0758145 seconds</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
 Analysis</h1>
 <p>The experiment clearly shows a significant performance improvement when using parallel processing methods compared to sequential methods. The parallel execution time (0.0758145 seconds) is substantially lower than the sequential execution time (0.553313 seconds) for the given image processing tasks (rotation and Gaussian filtering) on the <code>sample1.bmp</code> image.</p>
 <p>This speedup is achieved by leveraging multiple processor cores to perform computations concurrently, as implemented using OpenMP in the C++ code. The parallel versions of <code>rotate90Clockwise</code>, <code>rotate90ContClockwise</code>, and <code>applyGaussianFilter</code> distribute the workload across available threads, leading to a faster overall execution time.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Conclusion</h1>
 <p>The addition of parallelism to the image processing solution has successfully resulted in a more performant application. The experimental results validate that the parallel implementation is significantly faster than the original sequential version, fulfilling the requirements of the task. </p>
 </div></div><!-- contents -->
