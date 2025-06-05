@@ -19,8 +19,8 @@ The experiment was conducted on the following hardware:
 
 The tests were performed on the following images:
 
-- <mcfile path="examples_BMP/bmp_24.bmp" name="examples_BMP/bmp_24.bmp"></mcfile>
-- <mcfile path="examples_BMP/sample1.bmp" name="examples_BMP/sample1.bmp"></mcfile>
+- "examples_BMP/bmp_24.bmp" 
+- "examples_BMP/sample1.bmp" 
 
 ## Experiment Results
 
