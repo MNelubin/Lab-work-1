@@ -166,13 +166,13 @@ public:
      * @brief Gets the width of the image.
      * @return The width of the image in pixels.
      */
-    unsigned int getWidth();
+    unsigned int getWidth() const;
 
     /**
      * @brief Gets the height of the image.
      * @return The height of the image in pixels.
      */
-    unsigned int getHeight();
+    unsigned int getHeight() const;
 
     /**
      * @brief Calculates the 1D index from 2D coordinates.
@@ -192,13 +192,13 @@ public:
      * @brief Gets a pointer to all pixel data.
      * @return Pointer to the RGBQUAD pixel data array.
      */
-    RGBQUAD* getPixels_all();
+    RGBQUAD* getPixels_all() const;
 
     /**
      * @brief Gets the BMP info header.
      * @return The BITMAPINFOHEADER structure.
      */
-    BITMAPINFOHEADER getInfoHeader();
+    BITMAPINFOHEADER getInfoHeader() const;
 
     /**
      * @brief Gets the BMP file header.

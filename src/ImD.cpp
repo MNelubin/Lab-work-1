@@ -210,7 +210,7 @@ void ImD::setPixel_1(unsigned int cord, RGBQUAD Data)
  * @brief Gets the width of the image.
  * @return The width of the image in pixels.
  */
-unsigned int ImD::getWidth()
+unsigned int ImD::getWidth() const
 {
     return infoHeader.biWidth;
 }
@@ -219,7 +219,7 @@ unsigned int ImD::getWidth()
  * @brief Gets the height of the image.
  * @return The height of the image in pixels.
  */
-unsigned int ImD::getHeight()
+unsigned int ImD::getHeight() const
 {
     return infoHeader.biHeight;
 }
@@ -392,7 +392,7 @@ void ImD::setPixel_all(RGBQUAD* Data)
  * @brief Gets a pointer to all pixel data.
  * @return Pointer to the RGBQUAD pixel data array.
  */
-RGBQUAD* ImD::getPixels_all()
+RGBQUAD* ImD::getPixels_all() const
 {
     return pixels;
 }
@@ -681,7 +681,7 @@ void ImD::reader(std::string fileName, bool need_clock, bool need_contrclock, bo
  * @brief Gets the BMP info header.
  * @return The BITMAPINFOHEADER structure.
  */
-BITMAPINFOHEADER ImD::getInfoHeader()
+BITMAPINFOHEADER ImD::getInfoHeader() const
 {
     return infoHeader;
 }
@@ -693,33 +693,51 @@ BITMAPINFOHEADER ImD::getInfoHeader()
  */
 void ImD::applyGaussianFilter_parallel(const std::string& fileName)
 {
-    const unsigned int total_pixels = infoHeader.biHeight * infoHeader.biWidth;
-    if (this->pixels == nullptr && total_pixels > 0)
-    {
+    const unsigned int height = infoHeader.biHeight;
+    const unsigned int width = infoHeader.biWidth;
+    const unsigned int total_pixels = height * width;
+
+    if (this->pixels == nullptr && total_pixels > 0) {
         return;
     }
+
+    if (this->pixels == nullptr) {
+        writeBMP(fileName + "_WGaus_parallel.bmp", *this);
+        return;
+    }
+
+    if (height == 0 || width == 0) {
+        writeBMP(fileName + "_WGaus_parallel.bmp", *this);
+        return;
+    }
+
     RGBQUAD* newPixels = new RGBQUAD[total_pixels];
+    if (!newPixels && total_pixels > 0) {
+        return;
+    }
 
-
-    #pragma omp parallel for collapse(2) schedule(static)
-    for (unsigned int y = 1; y < infoHeader.biHeight - 1; ++y)
-    {
-        for (unsigned int x = 1; x < infoHeader.biWidth - 1; ++x)
-        {
-            double red = 0.0, green = 0.0, blue = 0.0;
-            for (int ky = -1; ky <= 1; ++ky)
-            {
-                for (int kx = -1; kx <= 1; ++kx)
-                {
-                    unsigned int pixelY = y + ky;
-                    unsigned int pixelX = x + kx;
-                    RGBQUAD currentPixel = pixels[getIndex(pixelX, pixelY)];
-                    red += currentPixel.rgbRed * gaussianKernel[ky + 1][kx + 1];
-                    green += currentPixel.rgbGreen * gaussianKernel[ky + 1][kx + 1];
-                    blue += currentPixel.rgbBlue * gaussianKernel[ky + 1][kx + 1];
+    if (height < 3 || width < 3) {
+        #pragma omp parallel for schedule(static)
+        for (unsigned int i = 0; i < total_pixels; ++i) {
+            newPixels[i] = this->pixels[i];
+        }
+    } else {
+        #pragma omp parallel for collapse(2) schedule(static)
+        for (unsigned int y = 1; y < height - 1; ++y) {
+            for (unsigned int x = 1; x < width - 1; ++x) {
+                double red = 0.0, green = 0.0, blue = 0.0;
+                for (int ky = -1; ky <= 1; ++ky) {
+                    for (int kx = -1; kx <= 1; ++kx) {
+                        unsigned int pixelY = y + ky;
+                        unsigned int pixelX = x + kx;
+                        RGBQUAD currentPixel = pixels[getIndex(pixelX, pixelY)];
+                        red += currentPixel.rgbRed * gaussianKernel[ky + 1][kx + 1];
+                        green += currentPixel.rgbGreen * gaussianKernel[ky + 1][kx + 1];
+                        blue += currentPixel.rgbBlue * gaussianKernel[ky + 1][kx + 1];
+                    }
                 }
+                newPixels[getIndex(x, y)] = {static_cast<unsigned char>(blue), static_cast<unsigned char>(green), static_cast<unsigned char>(red)};
             }
-            newPixels[getIndex(x, y)] = {static_cast<unsigned char>(blue), static_cast<unsigned char>(green), static_cast<unsigned char>(red)};
         }
     }
 
